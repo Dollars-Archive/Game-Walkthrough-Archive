@@ -1,3 +1,20 @@
 {
-  "guides": []
+  "guides": [
+    {
+      "id": "tears-to-tiara-2-complete",
+      "patch_repo": "tears-to-tiara-2-kr-patch",
+      "game": "티어즈 투 티아라 2",
+      "platforms": [
+        "PS3"
+      ],
+      "title": "티어즈 투 티아라 2 한국어 완전 공략집",
+      "category": "완전 공략",
+      "format": "HTML",
+      "url": "https://dollars-archive.github.io/Game-Walkthrough-Archive/guides/tears-to-tiara-2-kr-patch/tears-to-tiara-2-complete.html",
+      "source_url": "https://github.com/Dollars-Archive/Game-Walkthrough-Archive/blob/main/guides/tears-to-tiara-2-kr-patch/tears-to-tiara-2-complete.html",
+      "cover": "https://dollars-archive.github.io/Dollars-Archive/covers/tears-to-tiara-2-kr-patch.webp?v=99ae968d8eac",
+      "cover_source": "https://gamesdb.launchbox-app.com/games/details/25025-tears-to-tiara-ii-heir-of-the-overlord",
+      "updated_at": "2026-10-05T17:25:37+09:00"
+    }
+  ]
 }

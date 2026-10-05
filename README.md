@@ -49,5 +49,5 @@ guides:
 ## 등록된 공략
 
 <!-- WALKTHROUGHS:START -->
-아직 등록된 공략이 없습니다.
+- [티어즈 투 티아라 2 — 티어즈 투 티아라 2 한국어 완전 공략집](https://dollars-archive.github.io/Game-Walkthrough-Archive/guides/tears-to-tiara-2-kr-patch/tears-to-tiara-2-complete.html)
 <!-- WALKTHROUGHS:END -->
