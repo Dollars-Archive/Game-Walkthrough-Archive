@@ -1,6 +1,7 @@
 import json
 import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 
 import yaml
@@ -38,6 +39,30 @@ class BuildTests(unittest.TestCase):
             data = build(root, {})
             self.assertEqual(data['guides'][0]['format'], 'PDF')
             self.assertEqual((root / 'docs/guides/guide.pdf').read_bytes(), b'%PDF-test')
+
+    def test_download_package_preserves_document_images_and_last_collected_counts(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.setup_root(root, [self.item(file='guides/eve/story.md')])
+            (root / 'guides/eve/images').mkdir(parents=True)
+            (root / 'guides/eve/story.md').write_text('# 공략\n\n![지도](images/map.png)', encoding='utf-8')
+            (root / 'guides/eve/images/map.png').write_bytes(b'image')
+            games = {'eve-zero-kr-patch': {'title': 'EVE ZERO', 'platforms': ['Dreamcast']}}
+            data = build(root, games)
+            guide = data['guides'][0]
+            self.assertIsNone(guide['download_count'])
+            with zipfile.ZipFile(root / '.local/downloads' / guide['download_asset_name']) as archive:
+                self.assertEqual(archive.read('images/map.png'), b'image')
+                self.assertIn('images/map.png', archive.read('story.html').decode('utf-8'))
+            guide.update(download_count=12, download_url='https://example.com/download.zip')
+            (root / 'docs/data/guides.json').write_text(json.dumps(data), encoding='utf-8')
+            again = build(root, games)['guides'][0]
+            self.assertEqual(again['download_asset_name'], guide['download_asset_name'])
+            self.assertEqual(again['download_count'], 12)
+            (root / 'guides/eve/images/map.png').write_bytes(b'new image')
+            changed = build(root, games)['guides'][0]
+            self.assertNotEqual(changed['download_asset_name'], guide['download_asset_name'])
+            self.assertIsNone(changed['download_count'])
 
 
     def test_html_is_published_without_rewriting(self):

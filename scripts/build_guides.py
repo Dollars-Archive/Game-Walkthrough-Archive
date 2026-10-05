@@ -13,6 +13,11 @@ from urllib.request import Request, urlopen
 import markdown
 import yaml
 
+try:
+    from .guide_downloads import package, release_tag
+except ImportError:
+    from guide_downloads import package, release_tag
+
 HOME = 'https://dollars-archive.github.io/Game-Walkthrough-Archive/'
 HUB = 'https://dollars-archive.github.io/Dollars-Archive/'
 
@@ -70,7 +75,9 @@ def build(root, patch_games=None):
     if len({item['id'] for item in records}) != len(records):
         raise ValueError('공략 id가 중복되었습니다.')
     games = patch_games if patch_games is not None else load_patch_games() if any(i.get('patch_repo') for i in records) else {}
-    output, guides = {}, []
+    output, guides, documents = {}, [], {}
+    previous_path = root / 'docs/data/guides.json'
+    previous = {g['id']: g for g in json.loads(previous_path.read_text(encoding='utf-8'))['guides']} if previous_path.exists() else {}
     for item, source in zip(records, sources):
         repo = item.get('patch_repo', '')
         if repo and repo not in games:
@@ -84,6 +91,7 @@ def build(root, patch_games=None):
             output[destination] = render_document(item['title'], content).encode('utf-8')
         else:
             output[destination] = source.read_bytes()
+        documents[item['id']] = destination
         cover = game.get('cover', '')
         if cover:
             cover = HUB + cover + ('?v=' + game['cover_revision'] if game.get('cover_revision') else '')
@@ -100,6 +108,23 @@ def build(root, patch_games=None):
             if not resolved.is_relative_to((root / 'guides').resolve()):
                 raise ValueError('공략 이미지 경로가 guides/ 밖을 가리킵니다.')
             output[Path('docs') / source.relative_to(root)] = source.read_bytes()
+    for guide in guides:
+        document = documents[guide['id']]
+        entries = {document.name: output[document]}
+        for path, content in output.items():
+            if path.suffix.lower() in ('.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg') and path.is_relative_to(document.parent):
+                entries[path.relative_to(document.parent).as_posix()] = content
+        name, payload = package(guide['id'], entries)
+        package_path = root / '.local/downloads' / name
+        package_path.parent.mkdir(parents=True, exist_ok=True)
+        if not package_path.exists() or package_path.read_bytes() != payload:
+            package_path.write_bytes(payload)
+        guide.update({'download_release_tag': release_tag(guide['id']), 'download_asset_name': name,
+                      'download_count': None, 'download_url': ''})
+        old = previous.get(guide['id'], {})
+        if old.get('download_asset_name') == name and old.get('download_release_tag') == guide['download_release_tag']:
+            guide['download_count'] = old.get('download_count')
+            guide['download_url'] = old.get('download_url', '')
     guides.sort(key=lambda g: g['updated_at'], reverse=True)
     catalogue = {'guides': guides}
     output[Path('docs/data/guides.json')] = (json.dumps(catalogue, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
