@@ -6,6 +6,14 @@ Dollars Archive가 직접 작성한 게임 공략만 모읍니다.
 
 ## 공략 등록
 
+파일을 GPT·Codex에 첨부하고 아래 요청문을 보내면 됩니다. GitHub 쓰기 권한이 있는 환경에서 실행하세요.
+
+> 내가 직접 만든 공략집이야. [등록 지침](https://github.com/Dollars-Archive/Game-Walkthrough-Archive/blob/main/REGISTER-GUIDE.md)을 읽고 이 파일을 등록해줘. 기존 공략의 수정본이면 업데이트하고, 공략 대문과 한패 대문 연결·배포까지 확인해줘.
+
+게임명과 기종이 파일에 없으면 함께 적어주세요. [GPT용 전체 지침과 등록 도구 사용법](REGISTER-GUIDE.md)을 준비해 두었습니다.
+
+### 직접 등록하는 경우
+
 1. 직접 만든 Markdown 또는 PDF 파일을 `guides/` 아래에 업로드합니다.
 2. `guides.yml`의 `guides` 목록에 아래처럼 등록합니다. 처음에는 `guides: []`를 `guides:`로 바꿉니다.
 
