@@ -10,10 +10,10 @@ function filtered(guides,{game='',platform='전체',category='전체',query=''}=
 function cards(guides,total){
  if(!guides.length)return `<div class="empty"><h2>${total?'조건에 맞는 공략이 없습니다.':'아직 등록된 공략집이 없습니다.'}</h2><p>${total?'검색어와 필터를 바꾸거나 전체 공략을 확인해 보세요.':'직접 만든 첫 공략을 등록하면 이곳에 표시됩니다.'}</p></div>`;
  return guides.map(g=>{
-  const cover=safeUrl(g.cover),source=safeUrl(g.cover_source),url=safeUrl(g.url),original=safeUrl(g.source_url);
+  const cover=safeUrl(g.cover),source=safeUrl(g.cover_source),url=safeUrl(g.url);
   const image=cover?`<img src="${esc(cover)}" alt="${esc(g.game)} 표지" loading="lazy">`:'표지 준비 중';
   const date=new Date(g.updated_at).toLocaleDateString('ko-KR',{timeZone:'Asia/Seoul'});
-  return `<article class="row" data-guide="${esc(g.id)}">${source?`<a class="cover" href="${esc(source)}" target="_blank" rel="noopener">${image}</a>`:`<div class="cover">${image}</div>`}<div><h2 class="game">${esc(g.game)}</h2><div class="platforms">${g.platforms.map(esc).join(' · ')}</div><div class="guide-title">${esc(g.title)}</div><div class="tags"><span class="tag">${esc(g.category)}</span><span class="tag format">${esc(g.format)}</span></div><div class="links"><a href="${esc(url)}" target="_blank" rel="noopener">${g.format==='PDF'?'PDF 열기':'공략 읽기'} ↗</a>${original?`<a href="${esc(original)}" target="_blank" rel="noopener">원문</a>`:''}</div></div><div class="updated">최근 수정<br>${esc(date)}</div></article>`;
+  return `<article class="row" data-guide="${esc(g.id)}">${source?`<a class="cover" href="${esc(source)}" target="_blank" rel="noopener">${image}</a>`:`<div class="cover">${image}</div>`}<div><h2 class="game">${esc(g.game)}</h2><div class="platforms">${g.platforms.map(esc).join(' · ')}</div><div class="guide-title">${esc(g.title)}</div><div class="tags"><span class="tag">${esc(g.category)}</span><span class="tag format">${esc(g.format)}</span></div><div class="links"><a href="${esc(url)}" target="_blank" rel="noopener">${g.format==='PDF'?'PDF 열기':'공략 읽기'} ↗</a><a href="${esc(url)}" download>다운로드</a></div></div><div class="updated">최근 수정<br>${esc(date)}</div></article>`;
  }).join('');
 }
 async function start(){
