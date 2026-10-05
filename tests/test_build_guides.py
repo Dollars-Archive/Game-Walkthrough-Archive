@@ -39,6 +39,18 @@ class BuildTests(unittest.TestCase):
             self.assertEqual(data['guides'][0]['format'], 'PDF')
             self.assertEqual((root / 'docs/guides/guide.pdf').read_bytes(), b'%PDF-test')
 
+
+    def test_html_is_published_without_rewriting(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.setup_root(root, [self.item(file='guides/guide.html')])
+            payload = '<!doctype html><html lang="ko"><script>window.guideReady=true</script><body>직접 만든 인터랙티브 공략</body></html>'
+            (root / 'guides/guide.html').write_text(payload, encoding='utf-8')
+            data = build(root, {'eve-zero-kr-patch': {'title': 'EVE ZERO', 'platforms': ['Dreamcast']}})
+            self.assertEqual(data['guides'][0]['format'], 'HTML')
+            self.assertTrue(data['guides'][0]['url'].endswith('guide.html'))
+            self.assertEqual((root / 'docs/guides/guide.html').read_text(encoding='utf-8'), payload)
+
     def test_missing_files_unconfirmed_ownership_and_outside_paths_are_rejected(self):
         for changes in ({'original': False}, {'file': '../secret.pdf'}, {'file': 'guides/missing.pdf'}):
             with self.subTest(changes=changes), tempfile.TemporaryDirectory() as tmp:

@@ -1,3 +1,8 @@
-# 직접 작성한 공략만 등록합니다. 예시는 README.md를 확인하세요.
-# 파일을 guides/에 올리고 여기에 한 번 등록하면 두 허브에 자동 반영됩니다.
-guides: []
+# 직접 작성한 공략 등록 목록 — scripts/register_guide.py로 등록·수정합니다.
+guides:
+- id: tears-to-tiara-2-complete
+  patch_repo: tears-to-tiara-2-kr-patch
+  title: 티어즈 투 티아라 2 한국어 완전 공략집
+  category: 완전 공략
+  file: guides/tears-to-tiara-2-kr-patch/tears-to-tiara-2-complete.html
+  original: true

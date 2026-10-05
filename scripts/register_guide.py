@@ -18,8 +18,8 @@ def register(root, source, *, guide_id, title, original, patch_repo='', game='',
     root, source = Path(root).resolve(), Path(source).resolve()
     if not original:
         raise ValueError('사용자가 직접 작성한 공략임을 확인한 뒤 --original을 지정합니다.')
-    if not source.is_file() or source.suffix.lower() not in ('.md', '.pdf'):
-        raise ValueError('등록할 실제 Markdown 또는 PDF 파일이 필요합니다.')
+    if not source.is_file() or source.suffix.lower() not in ('.md', '.pdf', '.html'):
+        raise ValueError('등록할 실제 Markdown, PDF 또는 HTML 파일이 필요합니다.')
     if not re.fullmatch(r'[a-z0-9][a-z0-9-]*', guide_id) or not title.strip():
         raise ValueError('영문 소문자·숫자·하이픈 id와 공략 제목이 필요합니다.')
     if not isinstance(patch_repo, str) or (patch_repo and not re.fullmatch(r'[A-Za-z0-9_.-]+', patch_repo)):

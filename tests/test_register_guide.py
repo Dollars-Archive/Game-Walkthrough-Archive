@@ -33,6 +33,17 @@ class RegistrationTests(unittest.TestCase):
             self.assertEqual((root / second['file']).read_bytes(), b'%PDF-second')
             self.assertEqual((Path(second['backup']) / 'guide-before.pdf').read_bytes(), b'%PDF-first')
 
+
+    def test_html_registers_without_conversion(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = self.root(root).with_suffix('.html')
+            payload = '<!doctype html><html><script>window.ok=true</script><body>공략</body></html>'
+            source.write_text(payload, encoding='utf-8')
+            result = register(root, source, **self.options())
+            self.assertTrue(result['file'].endswith('.html'))
+            self.assertEqual((root / result['file']).read_text(encoding='utf-8'), payload)
+
     def test_unconfirmed_or_unknown_game_fails_before_writing(self):
         for changes in ({'original': False}, {'patch_games': {}}, {'guide_id': '../bad'}):
             with self.subTest(changes=changes), tempfile.TemporaryDirectory() as tmp:

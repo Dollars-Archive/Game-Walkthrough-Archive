@@ -1,4 +1,4 @@
-"""Publish only owner-authored, registered Markdown and PDF walkthroughs."""
+"""Publish only owner-authored, registered Markdown, PDF, and HTML walkthroughs."""
 import argparse
 import html
 import json
@@ -27,8 +27,8 @@ def validate(root, item):
         raise ValueError('id는 영문 소문자·숫자·하이픈으로 입력합니다.')
     source = (root / item['file']).resolve()
     guide_root = (root / 'guides').resolve()
-    if not source.is_relative_to(guide_root) or not source.is_file() or source.suffix.lower() not in ('.md', '.pdf'):
-        raise ValueError('파일은 guides/ 아래의 실제 Markdown 또는 PDF여야 합니다.')
+    if not source.is_relative_to(guide_root) or not source.is_file() or source.suffix.lower() not in ('.md', '.pdf', '.html'):
+        raise ValueError('파일은 guides/ 아래의 실제 Markdown, PDF 또는 HTML이어야 합니다.')
     repo = item.get('patch_repo', '')
     if not isinstance(repo, str) or (repo and not re.fullmatch(r'[A-Za-z0-9_.-]+', repo)):
         raise ValueError('patch_repo는 저장소 이름이어야 합니다.')
