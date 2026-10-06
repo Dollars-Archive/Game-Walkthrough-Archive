@@ -1,6 +1,26 @@
 {
   "guides": [
     {
+      "id": "radiata-stories-177-guide",
+      "patch_repo": "",
+      "game": "라디아타 스토리즈",
+      "platforms": [
+        "PS2"
+      ],
+      "title": "라디아타 스토리즈 · 동료 177명 완전 영입 체크리스트",
+      "category": "동료 영입",
+      "format": "HTML",
+      "url": "https://dollars-archive.github.io/Game-Walkthrough-Archive/guides/radiata-stories-177-guide/radiata-stories-177-guide.html",
+      "source_url": "https://github.com/Dollars-Archive/Game-Walkthrough-Archive/blob/main/guides/radiata-stories-177-guide/radiata-stories-177-guide.html",
+      "cover": "",
+      "cover_source": "",
+      "updated_at": "2026-10-06T21:47:16+09:00",
+      "download_release_tag": "guide-radiata-stories-177-guide",
+      "download_asset_name": "radiata-stories-177-guide-a30cece1f4e22683.zip",
+      "download_count": 0,
+      "download_url": "https://github.com/Dollars-Archive/Game-Walkthrough-Archive/releases/download/guide-radiata-stories-177-guide/radiata-stories-177-guide-a30cece1f4e22683.zip"
+    },
+    {
       "id": "venus-and-braves-guide",
       "patch_repo": "",
       "game": "비너스 앤 브레이브스",
@@ -21,26 +41,6 @@
       "download_url": "https://github.com/Dollars-Archive/Game-Walkthrough-Archive/releases/download/guide-venus-and-braves-guide/venus-and-braves-guide-79bcae9ef35b53e0.zip"
     },
     {
-      "id": "radiata-stories-177-guide",
-      "patch_repo": "",
-      "game": "라디아타 스토리즈",
-      "platforms": [
-        "PS2"
-      ],
-      "title": "라디아타 스토리즈 · 동료 177명 완전 영입 체크리스트",
-      "category": "동료 영입",
-      "format": "HTML",
-      "url": "https://dollars-archive.github.io/Game-Walkthrough-Archive/guides/radiata-stories-177-guide/radiata-stories-177-guide.html",
-      "source_url": "https://github.com/Dollars-Archive/Game-Walkthrough-Archive/blob/main/guides/radiata-stories-177-guide/radiata-stories-177-guide.html",
-      "cover": "",
-      "cover_source": "",
-      "updated_at": "2026-10-06T12:07:20+00:00",
-      "download_release_tag": "guide-radiata-stories-177-guide",
-      "download_asset_name": "radiata-stories-177-guide-a30cece1f4e22683.zip",
-      "download_count": null,
-      "download_url": ""
-    },
-    {
       "id": "tears-to-tiara-2-complete",
       "patch_repo": "tears-to-tiara-2-kr-patch",
       "game": "티어즈 투 티아라 2",
@@ -56,9 +56,9 @@
       "cover_source": "https://gamesdb.launchbox-app.com/games/details/25025-tears-to-tiara-ii-heir-of-the-overlord",
       "updated_at": "2026-10-05T17:25:37+09:00",
       "download_release_tag": "guide-tears-to-tiara-2-complete",
-      "download_asset_name": "tears-to-tiara-2-complete-1b34826c42fda417.zip",
-      "download_count": null,
-      "download_url": ""
+      "download_asset_name": "tears-to-tiara-2-complete-6b49380ec9c3c1ce.zip",
+      "download_count": 2,
+      "download_url": "https://github.com/Dollars-Archive/Game-Walkthrough-Archive/releases/download/guide-tears-to-tiara-2-complete/tears-to-tiara-2-complete-6b49380ec9c3c1ce.zip"
     }
   ]
 }
