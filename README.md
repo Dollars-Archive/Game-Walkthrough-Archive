@@ -53,5 +53,6 @@ guides:
 ## 등록된 공략
 
 <!-- WALKTHROUGHS:START -->
+- [비너스 앤 브레이브스 — 비너스 앤 브레이브스 · 100년의 여정 플로우 가이드](https://dollars-archive.github.io/Game-Walkthrough-Archive/guides/venus-and-braves-guide/venus-and-braves-guide.html)
 - [티어즈 투 티아라 2 — 티어즈 투 티아라 2 한국어 완전 공략집](https://dollars-archive.github.io/Game-Walkthrough-Archive/guides/tears-to-tiara-2-kr-patch/tears-to-tiara-2-complete.html)
 <!-- WALKTHROUGHS:END -->

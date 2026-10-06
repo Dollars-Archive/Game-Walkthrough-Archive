@@ -6,3 +6,12 @@ guides:
   category: 완전 공략
   file: guides/tears-to-tiara-2-kr-patch/tears-to-tiara-2-complete.html
   original: true
+- id: venus-and-braves-guide
+  patch_repo: ''
+  title: 비너스 앤 브레이브스 · 100년의 여정 플로우 가이드
+  category: 전체 공략
+  file: guides/venus-and-braves-guide/venus-and-braves-guide.html
+  original: true
+  game: 비너스 앤 브레이브스
+  platforms:
+  - PSP
