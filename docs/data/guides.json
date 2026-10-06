@@ -1,6 +1,26 @@
 {
   "guides": [
     {
+      "id": "venus-and-braves-guide",
+      "patch_repo": "",
+      "game": "비너스 앤 브레이브스",
+      "platforms": [
+        "PSP"
+      ],
+      "title": "비너스 앤 브레이브스 · 100년의 여정 플로우 가이드",
+      "category": "전체 공략",
+      "format": "HTML",
+      "url": "https://dollars-archive.github.io/Game-Walkthrough-Archive/guides/venus-and-braves-guide/venus-and-braves-guide.html",
+      "source_url": "https://github.com/Dollars-Archive/Game-Walkthrough-Archive/blob/main/guides/venus-and-braves-guide/venus-and-braves-guide.html",
+      "cover": "https://dollars-archive.github.io/Game-Walkthrough-Archive/covers/venus-and-braves-guide.webp?v=8f891e134e12",
+      "cover_source": "https://vgcollect.com/item/49194",
+      "updated_at": "2026-10-06T23:10:11+09:00",
+      "download_release_tag": "guide-venus-and-braves-guide",
+      "download_asset_name": "venus-and-braves-guide-22cc76c14c170df9.zip",
+      "download_count": 0,
+      "download_url": "https://github.com/Dollars-Archive/Game-Walkthrough-Archive/releases/download/guide-venus-and-braves-guide/venus-and-braves-guide-22cc76c14c170df9.zip"
+    },
+    {
       "id": "radiata-stories-177-guide",
       "patch_repo": "",
       "game": "라디아타 스토리즈",
@@ -19,26 +39,6 @@
       "download_asset_name": "radiata-stories-177-guide-2419385a3bb009de.zip",
       "download_count": 0,
       "download_url": "https://github.com/Dollars-Archive/Game-Walkthrough-Archive/releases/download/guide-radiata-stories-177-guide/radiata-stories-177-guide-2419385a3bb009de.zip"
-    },
-    {
-      "id": "venus-and-braves-guide",
-      "patch_repo": "",
-      "game": "비너스 앤 브레이브스",
-      "platforms": [
-        "PSP"
-      ],
-      "title": "비너스 앤 브레이브스 · 100년의 여정 플로우 가이드",
-      "category": "전체 공략",
-      "format": "HTML",
-      "url": "https://dollars-archive.github.io/Game-Walkthrough-Archive/guides/venus-and-braves-guide/venus-and-braves-guide.html",
-      "source_url": "https://github.com/Dollars-Archive/Game-Walkthrough-Archive/blob/main/guides/venus-and-braves-guide/venus-and-braves-guide.html",
-      "cover": "https://dollars-archive.github.io/Game-Walkthrough-Archive/covers/venus-and-braves-guide.webp?v=8f891e134e12",
-      "cover_source": "https://vgcollect.com/item/49194",
-      "updated_at": "2026-10-06T20:29:41+09:00",
-      "download_release_tag": "guide-venus-and-braves-guide",
-      "download_asset_name": "venus-and-braves-guide-e27385abf32e57c7.zip",
-      "download_count": null,
-      "download_url": ""
     },
     {
       "id": "tears-to-tiara-2-complete",
