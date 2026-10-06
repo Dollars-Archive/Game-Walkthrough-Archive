@@ -40,6 +40,31 @@ class BuildTests(unittest.TestCase):
             self.assertEqual(data['guides'][0]['format'], 'PDF')
             self.assertEqual((root / 'docs/guides/guide.pdf').read_bytes(), b'%PDF-test')
 
+    def test_unlinked_cover_is_published_without_changing_guide_download(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.setup_root(root, [self.item(file='guides/guide.html', patch_repo='', game='게임', platforms=['PSP'], cover='covers/front.webp', cover_source='https://example.com/psp')])
+            (root / 'guides/guide.html').write_text('<html>공략</html>', encoding='utf-8')
+            (root / 'covers').mkdir()
+            (root / 'covers/front.webp').write_bytes(b'front-cover')
+            first = build(root, {})['guides'][0]
+            self.assertIn('/covers/front.webp?v=', first['cover'])
+            self.assertEqual(first['cover_source'], 'https://example.com/psp')
+            self.assertEqual((root / 'docs/covers/front.webp').read_bytes(), b'front-cover')
+            (root / 'covers/front.webp').write_bytes(b'updated-cover')
+            second = build(root, {})['guides'][0]
+            self.assertNotEqual(first['cover'], second['cover'])
+            self.assertEqual(first['download_asset_name'], second['download_asset_name'])
+
+    def test_cover_cannot_read_outside_cover_directory(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.setup_root(root, [self.item(file='guides/guide.html', patch_repo='', game='게임', platforms=['PS2'], cover='private.webp')])
+            (root / 'guides/guide.html').write_text('<html>공략</html>', encoding='utf-8')
+            (root / 'private.webp').write_bytes(b'private')
+            with self.assertRaises(ValueError):
+                build(root, {})
+
     def test_download_package_preserves_document_images_and_last_collected_counts(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

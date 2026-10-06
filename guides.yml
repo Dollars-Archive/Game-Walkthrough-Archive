@@ -15,6 +15,11 @@ guides:
   game: 비너스 앤 브레이브스
   platforms:
   - PSP
+  cover: covers/venus-and-braves-guide.webp
+  cover_source: https://vgcollect.com/item/49194
+  cover_type: package-front
+  cover_region: Japan
+  cover_product_id: ULJS-00308
 - id: radiata-stories-177-guide
   patch_repo: ''
   title: 라디아타 스토리즈 · 동료 177명 완전 영입 체크리스트
@@ -24,3 +29,8 @@ guides:
   game: 라디아타 스토리즈
   platforms:
   - PS2
+  cover: covers/radiata-stories-177-guide.webp
+  cover_source: https://psxdatacenter.com/psx2/games2/SLPM-65800.html
+  cover_type: package-front
+  cover_region: Japan
+  cover_product_id: SLPM-65800

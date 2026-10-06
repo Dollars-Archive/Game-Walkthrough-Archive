@@ -1,5 +1,6 @@
 """Publish only owner-authored, registered Markdown, PDF, and HTML walkthroughs."""
 import argparse
+import hashlib
 import html
 import json
 import re
@@ -95,12 +96,21 @@ def build(root, patch_games=None):
         cover = game.get('cover', '')
         if cover:
             cover = HUB + cover + ('?v=' + game['cover_revision'] if game.get('cover_revision') else '')
+        elif item.get('cover'):
+            cover_path = (root / item['cover']).resolve()
+            if not cover_path.is_relative_to((root / 'covers').resolve()) or not cover_path.is_file() or cover_path.suffix.lower() not in ('.png', '.jpg', '.jpeg', '.webp'):
+                raise ValueError('자체 표지는 covers/ 아래의 실제 이미지여야 합니다.')
+            cover_data = cover_path.read_bytes()
+            cover_target = Path('docs') / cover_path.relative_to(root)
+            output[cover_target] = cover_data
+            revision = hashlib.sha256(cover_data).hexdigest()[:12]
+            cover = HOME + quote(cover_target.relative_to('docs').as_posix()) + '?v=' + revision
         guides.append({'id': item['id'], 'patch_repo': repo, 'game': game.get('title') or item.get('game'),
             'platforms': game.get('platforms') or item.get('platforms'), 'title': item['title'],
             'category': item.get('category') or '전체 공략', 'format': source.suffix[1:].upper(),
             'url': HOME + quote(destination.relative_to('docs').as_posix()),
             'source_url': 'https://github.com/Dollars-Archive/Game-Walkthrough-Archive/blob/main/' + quote(relative),
-            'cover': cover, 'cover_source': game.get('cover_source', ''), 'updated_at': updated(root, source)})
+            'cover': cover, 'cover_source': game.get('cover_source') or item.get('cover_source', ''), 'updated_at': updated(root, source)})
     # Copy assets beside registered Markdown so relative image links keep working.
     for source in (root / 'guides').rglob('*'):
         if source.is_file() and source.suffix.lower() in ('.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg'):
