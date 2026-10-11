@@ -49,6 +49,7 @@ def register(root, source, *, guide_id, title, original, patch_repo='', game='',
         raise ValueError('등록 경로가 guides/ 밖입니다.')
     record = {**(existing or {}), 'id': guide_id, 'patch_repo': patch_repo, 'title': title,
               'category': category, 'file': relative.as_posix(), 'original': True}
+    record.pop('pending', None)
     if not patch_repo:
         record.update(game=game, platforms=platforms)
     payload = source.read_bytes()

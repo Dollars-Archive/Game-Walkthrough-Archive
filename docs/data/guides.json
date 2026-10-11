@@ -1,6 +1,44 @@
 {
   "guides": [
     {
+      "id": "guardian-angel-guide",
+      "patch_repo": "Guardian-Angel-Korean-Localization",
+      "game": "가디언 엔젤",
+      "platforms": [
+        "PS2"
+      ],
+      "title": "가디언 엔젤 공략집",
+      "category": "공략집",
+      "format": "파일 준비 중",
+      "pending": true,
+      "url": "https://dollars-archive.github.io/Game-Walkthrough-Archive/?game=Guardian-Angel-Korean-Localization",
+      "source_url": "",
+      "cover": "https://dollars-archive.github.io/Dollars-Archive/covers/Guardian-Angel-Korean-Localization.webp?v=e7bc3b2e946d",
+      "cover_source": "https://gamesdb.launchbox-app.com/games/details/375952-guardian-angel",
+      "updated_at": "2026-10-11",
+      "download_count": null,
+      "download_url": ""
+    },
+    {
+      "id": "twelve-sengoku-fuushinden-guide",
+      "patch_repo": "twelve-sengoku-fuushinden-kr-patch",
+      "game": "트웰브 전국봉신전",
+      "platforms": [
+        "PSP"
+      ],
+      "title": "트웰브 전국봉신전 공략집",
+      "category": "공략집",
+      "format": "파일 준비 중",
+      "pending": true,
+      "url": "https://dollars-archive.github.io/Game-Walkthrough-Archive/?game=twelve-sengoku-fuushinden-kr-patch",
+      "source_url": "",
+      "cover": "https://dollars-archive.github.io/Dollars-Archive/covers/twelve-sengoku-fuushinden-kr-patch.webp?v=57fe23beb704",
+      "cover_source": "https://gamesdb.launchbox-app.com/games/details/82074-twelve-sengoku-fuushinden",
+      "updated_at": "2026-10-11",
+      "download_count": null,
+      "download_url": ""
+    },
+    {
       "id": "venus-and-braves-guide",
       "patch_repo": "",
       "game": "비너스 앤 브레이브스",
@@ -16,9 +54,9 @@
       "cover_source": "https://vgcollect.com/item/49194",
       "updated_at": "2026-10-06T23:10:11+09:00",
       "download_release_tag": "guide-venus-and-braves-guide",
-      "download_asset_name": "venus-and-braves-guide-22cc76c14c170df9.zip",
-      "download_count": 1,
-      "download_url": "https://github.com/Dollars-Archive/Game-Walkthrough-Archive/releases/download/guide-venus-and-braves-guide/venus-and-braves-guide-22cc76c14c170df9.zip"
+      "download_asset_name": "venus-and-braves-guide-e27385abf32e57c7.zip",
+      "download_count": null,
+      "download_url": ""
     },
     {
       "id": "radiata-stories-177-guide",
@@ -36,9 +74,9 @@
       "cover_source": "https://psxdatacenter.com/psx2/games2/SLPM-65800.html",
       "updated_at": "2026-10-06T22:35:10+09:00",
       "download_release_tag": "guide-radiata-stories-177-guide",
-      "download_asset_name": "radiata-stories-177-guide-2419385a3bb009de.zip",
-      "download_count": 1,
-      "download_url": "https://github.com/Dollars-Archive/Game-Walkthrough-Archive/releases/download/guide-radiata-stories-177-guide/radiata-stories-177-guide-2419385a3bb009de.zip"
+      "download_asset_name": "radiata-stories-177-guide-02521d2c4581500c.zip",
+      "download_count": null,
+      "download_url": ""
     },
     {
       "id": "tears-to-tiara-2-complete",
@@ -56,9 +94,9 @@
       "cover_source": "https://gamesdb.launchbox-app.com/games/details/25025-tears-to-tiara-ii-heir-of-the-overlord",
       "updated_at": "2026-10-05T17:25:37+09:00",
       "download_release_tag": "guide-tears-to-tiara-2-complete",
-      "download_asset_name": "tears-to-tiara-2-complete-6b49380ec9c3c1ce.zip",
-      "download_count": 3,
-      "download_url": "https://github.com/Dollars-Archive/Game-Walkthrough-Archive/releases/download/guide-tears-to-tiara-2-complete/tears-to-tiara-2-complete-6b49380ec9c3c1ce.zip"
+      "download_asset_name": "tears-to-tiara-2-complete-1b34826c42fda417.zip",
+      "download_count": null,
+      "download_url": ""
     }
   ]
 }

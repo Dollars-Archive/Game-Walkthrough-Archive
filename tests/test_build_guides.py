@@ -9,6 +9,24 @@ from scripts.build_guides import build
 
 
 class BuildTests(unittest.TestCase):
+    def test_pending_guide_has_no_document_package_or_release(self):
+        from scripts.guide_downloads import publish
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.setup_root(root, [{'id': 'guardian-angel-guide', 'patch_repo': 'Guardian-Angel-Korean-Localization',
+                                   'title': '가디언 엔젤 공략집', 'pending': True, 'updated_at': '2026-10-11'}])
+            games = {'Guardian-Angel-Korean-Localization': {'title': '가디언 엔젤', 'platforms': ['PS2'],
+                                                           'cover': 'covers/guardian.webp'}}
+            data = build(root, games)
+            guide = data['guides'][0]
+            self.assertTrue(guide['pending'])
+            self.assertEqual(guide['platforms'], ['PS2'])
+            self.assertTrue(guide['url'].endswith('?game=Guardian-Angel-Korean-Localization'))
+            self.assertIsNone(guide['download_count'])
+            self.assertNotIn('download_asset_name', guide)
+            self.assertFalse((root / '.local/downloads').exists())
+            self.assertEqual(publish(root, object()), data)
+
     def setup_root(self, path, records):
         (path / 'guides').mkdir()
         (path / 'README.md').write_text('<!-- WALKTHROUGHS:START -->\n<!-- WALKTHROUGHS:END -->', encoding='utf-8')

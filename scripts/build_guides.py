@@ -24,17 +24,13 @@ HUB = 'https://dollars-archive.github.io/Dollars-Archive/'
 
 
 def validate(root, item):
-    if not isinstance(item, dict) or item.get('original') is not True:
+    if not isinstance(item, dict) or (item.get('pending') is not True and item.get('original') is not True):
         raise ValueError('직접 작성한 공략은 original: true 확인이 필요합니다.')
-    for key in ('id', 'title', 'file'):
+    for key in (('id', 'title') if item.get('pending') is True else ('id', 'title', 'file')):
         if not isinstance(item.get(key), str) or not item[key].strip():
             raise ValueError(f'{key} 입력이 필요합니다.')
     if not re.fullmatch(r'[a-z0-9][a-z0-9-]*', item['id']):
         raise ValueError('id는 영문 소문자·숫자·하이픈으로 입력합니다.')
-    source = (root / item['file']).resolve()
-    guide_root = (root / 'guides').resolve()
-    if not source.is_relative_to(guide_root) or not source.is_file() or source.suffix.lower() not in ('.md', '.pdf', '.html'):
-        raise ValueError('파일은 guides/ 아래의 실제 Markdown, PDF 또는 HTML이어야 합니다.')
     repo = item.get('patch_repo', '')
     if not isinstance(repo, str) or (repo and not re.fullmatch(r'[A-Za-z0-9_.-]+', repo)):
         raise ValueError('patch_repo는 저장소 이름이어야 합니다.')
@@ -42,6 +38,14 @@ def validate(root, item):
                      or not isinstance(item.get('platforms'), list) or not item['platforms']
                      or any(not isinstance(p, str) or not p for p in item['platforms'])):
         raise ValueError('패치가 없는 게임은 game과 platforms를 입력합니다.')
+    if item.get('pending') is True:
+        if item.get('file'):
+            raise ValueError('파일을 등록할 때는 pending 표시를 해제하세요.')
+        return None
+    source = (root / item['file']).resolve()
+    guide_root = (root / 'guides').resolve()
+    if not source.is_relative_to(guide_root) or not source.is_file() or source.suffix.lower() not in ('.md', '.pdf', '.html'):
+        raise ValueError('파일은 guides/ 아래의 실제 Markdown, PDF 또는 HTML이어야 합니다.')
     return source
 
 
@@ -84,6 +88,16 @@ def build(root, patch_games=None):
         if repo and repo not in games:
             raise ValueError(f'{repo}: 한글패치 허브에 등록된 저장소 이름을 확인하세요.')
         game = games.get(repo, {})
+        if source is None:
+            cover = game.get('cover', '')
+            if cover:
+                cover = HUB + cover + ('?v=' + game['cover_revision'] if game.get('cover_revision') else '')
+            guides.append({'id': item['id'], 'patch_repo': repo, 'game': game.get('title') or item.get('game'),
+                'platforms': game.get('platforms') or item.get('platforms'), 'title': item['title'],
+                'category': item.get('category') or '공략집', 'format': '파일 준비 중', 'pending': True,
+                'url': HOME + '?game=' + quote(repo or item['id']), 'source_url': '', 'cover': cover, 'cover_source': game.get('cover_source', ''),
+                'updated_at': item.get('updated_at') or updated(root, root / 'guides.yml'), 'download_count': None, 'download_url': ''})
+            continue
         relative = source.relative_to(root).as_posix()
         destination = Path('docs') / relative
         if source.suffix.lower() == '.md':
@@ -119,6 +133,8 @@ def build(root, patch_games=None):
                 raise ValueError('공략 이미지 경로가 guides/ 밖을 가리킵니다.')
             output[Path('docs') / source.relative_to(root)] = source.read_bytes()
     for guide in guides:
+        if guide.get('pending'):
+            continue
         document = documents[guide['id']]
         entries = {document.name: output[document]}
         for path, content in output.items():
@@ -139,7 +155,7 @@ def build(root, patch_games=None):
     catalogue = {'guides': guides}
     output[Path('docs/data/guides.json')] = (json.dumps(catalogue, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
     readme = (root / 'README.md').read_text(encoding='utf-8')
-    listing = '\n'.join(f"- [{g['game']} — {g['title']}]({g['url']})" for g in guides) or '아직 등록된 공략이 없습니다.'
+    listing = '\n'.join(f"- {g['game']} — 파일 준비 중" if g.get('pending') else f"- [{g['game']} — {g['title']}]({g['url']})" for g in guides) or '아직 등록된 공략이 없습니다.'
     output[Path('README.md')] = re.sub(r'(?<=<!-- WALKTHROUGHS:START -->).*?(?=<!-- WALKTHROUGHS:END -->)', '\n' + listing + '\n', readme, flags=re.S).encode('utf-8')
     for path, content in output.items():
         target = root / path

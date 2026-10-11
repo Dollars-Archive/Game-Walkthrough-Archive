@@ -110,6 +110,8 @@ def publish(root, client):
     catalogue_path = root / 'docs/data/guides.json'
     catalogue = json.loads(catalogue_path.read_text(encoding='utf-8'))
     for guide in catalogue['guides']:
+        if guide.get('pending'):
+            continue
         tag = release_tag(guide['id'])
         if guide.get('download_release_tag') != tag:
             raise ValueError('Build the catalogue before publishing downloads')

@@ -2,6 +2,15 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const archive=require('../docs/archive.js');
 const guide=(id='a',changes={})=>({id,patch_repo:'eve-zero-kr-patch',game:'EVE ZERO',title:'분기 공략',category:'분기',format:'MD',platforms:['Dreamcast'],url:'https://dollars-archive.github.io/Game-Walkthrough-Archive/guides/eve/guide.html',updated_at:'2026-10-05T00:00:00Z',...changes});
 test('empty archive has an honest empty state and no fake guides',()=>{assert(archive.cards([],0).includes('아직 등록된'));assert(archive.valid({guides:[]}))});
+test('pending guide keeps its row and cover without read or download actions',()=>{
+ const pending=guide('guardian-angel-guide',{pending:true,url:'',format:'파일 준비 중',download_count:null});
+ assert(archive.valid({guides:[pending]}));
+ const out=archive.cards([pending],1);
+ assert(out.includes('공략 파일 준비 중'));assert(out.includes('class="row"'));
+ assert(!out.includes('공략 읽기'));assert(!out.includes(' download>'));
+ assert(out.includes('class="download-count">—</div>'));
+ assert(!archive.valid({guides:[{...pending,url:'javascript:bad'}]}));
+});
 test('guide card replaces source link with a direct download action',()=>{
  const out=archive.cards([guide()],1);
  assert(out.includes(' download>다운로드</a>'));

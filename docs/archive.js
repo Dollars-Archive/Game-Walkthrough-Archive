@@ -43,7 +43,7 @@ async function refreshDownloads(guides,fetcher=root.fetch){
   }catch(e){/* Keep this guide's last collected count and working link. */}
  }
 }
-function valid(data){return data&&Array.isArray(data.guides)&&data.guides.every(g=>typeof g.id==='string'&&typeof g.patch_repo==='string'&&typeof g.game==='string'&&typeof g.title==='string'&&typeof g.category==='string'&&Array.isArray(g.platforms)&&g.platforms.every(p=>typeof p==='string')&&safeUrl(g.url)&&Number.isFinite(Date.parse(g.updated_at)))}
+function valid(data){return data&&Array.isArray(data.guides)&&data.guides.every(g=>typeof g.id==='string'&&typeof g.patch_repo==='string'&&typeof g.game==='string'&&typeof g.title==='string'&&typeof g.category==='string'&&Array.isArray(g.platforms)&&g.platforms.every(p=>typeof p==='string')&&(safeUrl(g.url)||(g.pending===true&&g.url==='' ))&&Number.isFinite(Date.parse(g.updated_at)))}
 function filtered(guides,{game='',platform='전체',category='전체',query=''}={}){
  const q=query.trim().toLowerCase();
  return guides.filter(g=>(!game||g.patch_repo===game)&&(platform==='전체'||g.platforms.includes(platform))&&(category==='전체'||g.category===category)&&(!q||[g.game,g.title,g.category].join(' ').toLowerCase().includes(q))).sort((a,b)=>Date.parse(b.updated_at)-Date.parse(a.updated_at)||a.id.localeCompare(b.id));
@@ -55,7 +55,8 @@ function cards(guides,total){
   const image=cover?`<img src="${esc(cover)}" alt="${esc(g.game)} 표지" loading="lazy">`:'표지 준비 중';
   const date=new Date(g.updated_at).toLocaleDateString('ko-KR',{timeZone:'Asia/Seoul'});
   const download=assetUrl(g,g.download_url)||url,count=Number.isSafeInteger(g.download_count)&&g.download_count>=0?g.download_count.toLocaleString('ko-KR'):'—';
-  return `<article class="row" data-guide="${esc(g.id)}">${source?`<a class="cover" href="${esc(source)}" target="_blank" rel="noopener">${image}</a>`:`<div class="cover">${image}</div>`}<div><h2 class="game">${esc(g.game)}</h2><div class="platforms">${g.platforms.map(esc).join(' · ')}</div><div class="guide-title">${esc(g.title)}</div><div class="tags"><span class="tag">${esc(g.category)}</span><span class="tag format">${esc(g.format)}</span></div><div class="links"><a href="${esc(url)}" target="_blank" rel="noopener">${g.format==='PDF'?'PDF 열기':'공략 읽기'} ↗</a><a href="${esc(download)}" download>다운로드</a></div></div><div class="metrics"><div class="download-count">${esc(count)}</div><div class="download-label">다운로드</div><div class="updated">최근 수정<br>${esc(date)}</div></div></article>`;
+  const actions=g.pending===true?'<span>공략 파일 준비 중</span>':`<a href="${esc(url)}" target="_blank" rel="noopener">${g.format==='PDF'?'PDF 열기':'공략 읽기'} ↗</a><a href="${esc(download)}" download>다운로드</a>`;
+  return `<article class="row" data-guide="${esc(g.id)}">${source?`<a class="cover" href="${esc(source)}" target="_blank" rel="noopener">${image}</a>`:`<div class="cover">${image}</div>`}<div><h2 class="game">${esc(g.game)}</h2><div class="platforms">${g.platforms.map(esc).join(' · ')}</div><div class="guide-title">${esc(g.title)}</div><div class="tags"><span class="tag">${esc(g.category)}</span><span class="tag format">${esc(g.format)}</span></div><div class="links">${actions}</div></div><div class="metrics"><div class="download-count">${esc(count)}</div><div class="download-label">다운로드</div><div class="updated">최근 수정<br>${esc(date)}</div></div></article>`;
  }).join('');
 }
 async function start(){

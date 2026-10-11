@@ -1,5 +1,17 @@
 # 직접 작성한 공략 등록 목록 — scripts/register_guide.py로 등록·수정합니다.
 guides:
+- id: guardian-angel-guide
+  patch_repo: Guardian-Angel-Korean-Localization
+  title: 가디언 엔젤 공략집
+  category: 공략집
+  pending: true
+  updated_at: '2026-10-11'
+- id: twelve-sengoku-fuushinden-guide
+  patch_repo: twelve-sengoku-fuushinden-kr-patch
+  title: 트웰브 전국봉신전 공략집
+  category: 공략집
+  pending: true
+  updated_at: '2026-10-11'
 - id: tears-to-tiara-2-complete
   patch_repo: tears-to-tiara-2-kr-patch
   title: 티어즈 투 티아라 2 한국어 완전 공략집
