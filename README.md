@@ -53,6 +53,8 @@ guides:
 ## 등록된 공략
 
 <!-- WALKTHROUGHS:START -->
+- 새벽의 호위 트리니티 — 파일 준비 중
+- 트윙클☆크루세이더스 STARLIT BRAVE!! — 파일 준비 중
 - 가디언 엔젤 — 파일 준비 중
 - 트웰브 전국봉신전 — 파일 준비 중
 - [비너스 앤 브레이브스 — 비너스 앤 브레이브스 · 100년의 여정 플로우 가이드](https://dollars-archive.github.io/Game-Walkthrough-Archive/guides/venus-and-braves-guide/venus-and-braves-guide.html)

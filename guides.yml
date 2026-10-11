@@ -1,5 +1,17 @@
 # 직접 작성한 공략 등록 목록 — scripts/register_guide.py로 등록·수정합니다.
 guides:
+- id: akatsuki-no-goei-trinity-guide
+  patch_repo: akatsuki-no-goei-trinity-kr-patch
+  title: 새벽의 호위 트리니티 공략집
+  category: 공략집
+  pending: true
+  updated_at: '2026-10-11'
+- id: twinkle-crusaders-starlit-brave-guide
+  patch_repo: twinkle-crusaders-starlit-brave-kr-patch
+  title: 트윙클☆크루세이더스 STARLIT BRAVE!! 공략집
+  category: 공략집
+  pending: true
+  updated_at: '2026-10-11'
 - id: guardian-angel-guide
   patch_repo: Guardian-Angel-Korean-Localization
   title: 가디언 엔젤 공략집
